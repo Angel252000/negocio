@@ -46,4 +46,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ---- Mobile Menu Toggle ----
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
+    mobileMenu.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // ---- Footer Year ----
+    const yearEl = document.querySelector('.footer-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
 });
