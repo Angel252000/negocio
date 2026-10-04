@@ -49,14 +49,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---- Mobile Menu Toggle ----
     const mobileMenu = document.querySelector('.mobile-menu');
     const navLinks = document.querySelector('.nav-links');
-    mobileMenu.addEventListener('click', () => {
-        mobileMenu.classList.toggle('active');
-        navLinks.classList.toggle('active');
+    const toggleMenu = () => {
+        const open = navLinks.classList.toggle('active');
+        mobileMenu.classList.toggle('active', open);
+        mobileMenu.setAttribute('aria-expanded', String(open));
+    };
+    mobileMenu.addEventListener('click', toggleMenu);
+    mobileMenu.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleMenu();
+        }
     });
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
             navLinks.classList.remove('active');
+            mobileMenu.setAttribute('aria-expanded', 'false');
         });
     });
 
